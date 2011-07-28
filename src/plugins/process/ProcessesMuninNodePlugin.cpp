@@ -18,6 +18,7 @@
 
 #include "StdAfx.h"
 #include "ProcessesMuninNodePlugin.h"
+#include <Psapi.h>
 
 ProcessesMuninNodePlugin::ProcessesMuninNodePlugin()
 {
@@ -40,6 +41,9 @@ int ProcessesMuninNodePlugin::GetConfig(char *buffer, int len)
     "threads.label threads\n"
     "threads.draw LINE1\n"
     "threads.info The current number of threads.\n"
+    "handles.label handles\n"
+    "handles.draw LINE1\n"
+    "handles.info The current number of handles.\n"
     ".\n", len);
 
   return 0;
@@ -47,23 +51,15 @@ int ProcessesMuninNodePlugin::GetConfig(char *buffer, int len)
 
 int ProcessesMuninNodePlugin::GetValues(char *buffer, int len) 
 { 
-  int processes = 0;
-  int threads = 0;
+  PERFORMANCE_INFORMATION pi;
 
-  HANDLE hSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-  if (hSnapShot != INVALID_HANDLE_VALUE) {
-    PROCESSENTRY32 entry;
-    memset(&entry, 0, sizeof(PROCESSENTRY32));
-    entry.dwSize = sizeof(PROCESSENTRY32);
-    Process32First(hSnapShot, &entry);
-    do {
-      processes++;
-      threads += entry.cntThreads;
-    } while (Process32Next(hSnapShot, &entry));
-
-    CloseHandle(hSnapShot);
+  if (GetPerformanceInfo(&pi, sizeof(PERFORMANCE_INFORMATION))) {
+	  int count;
+	  count = _snprintf(buffer, len, "processes.value %u\nthreads.value %u\nhandles.value %u\n", pi.ProcessCount, pi.ThreadCount, pi.HandleCount);
+	  buffer = buffer + count;
+	  len -= count;
   }
 
-  _snprintf(buffer, len, "processes.value %i\nthreads.value %i\n.\n", processes, threads);
+  strncat(buffer, ".\n", len);
   return 0;
 }

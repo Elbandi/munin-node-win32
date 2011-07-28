@@ -9,6 +9,7 @@ public:
   virtual ~SpeedFanNodePlugin();
 
   virtual bool IsLoaded() { return m_Listener != NULL; };  
+  virtual bool AutoConf() { return TRUE; };
   virtual const char *GetName() { return "speedfan"; };
   virtual int GetConfig(char *buffer, int len);
   virtual int GetValues(char *buffer, int len);

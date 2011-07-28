@@ -29,7 +29,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine=""
+				CommandLine="&quot;$(VCInstallDir)bin\link.exe&quot; /LIB /DEF:ntdll.def /MACHINE:X86 /OUT:$(OutDir)/ntdll.lib"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -47,7 +47,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories=".;src/"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x500;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x501;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -66,7 +66,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib"
+				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(OutDir)/ntdll.lib"
 				OutputFile="$(OutDir)/munin-node.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
@@ -110,7 +110,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine=""
+				CommandLine="&quot;$(VCInstallDir)bin\link.exe&quot; /LIB /DEF:ntdll.def /MACHINE:X64/OUT:$(OutDir)/ntdll.lib"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -129,7 +129,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories=".;src/"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x500;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_WIN32_WINNT=0x501;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -148,7 +148,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib"
+				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(OutDir)/ntdll.lib"
 				OutputFile="$(OutDir)/munin-node.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
@@ -193,7 +193,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine=""
+				CommandLine="&quot;$(VCInstallDir)bin\link.exe&quot; /LIB /DEF:ntdll.def /MACHINE:X86 /OUT:$(OutDir)/ntdll.lib"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -214,7 +214,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				AdditionalIncludeDirectories=".;src/"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_WIN32_WINNT=0x500;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x501;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				ExceptionHandling="1"
 				RuntimeLibrary="2"
@@ -233,7 +233,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib"
+				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(OutDir)/ntdll.lib"
 				OutputFile="$(OutDir)/munin-node.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""
@@ -279,7 +279,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="updateBuild.py -i munin-node-template.rc -o munin-node.rc"
+				CommandLine="&quot;$(VCInstallDir)bin\link.exe&quot; /LIB /DEF:ntdll.def /MACHINE:X64 /OUT:$(OutDir)/ntdll.lib"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -301,7 +301,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				AdditionalIncludeDirectories=".;src/"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_WIN32_WINNT=0x500;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_WIN32_WINNT=0x501;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				ExceptionHandling="1"
 				RuntimeLibrary="0"
@@ -320,7 +320,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib"
+				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(OutDir)/ntdll.lib"
 				OutputFile="$(OutDir)/munin-node.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""
@@ -507,14 +507,6 @@
 			Name="extra"
 			>
 			<File
-				RelativePath=".\src\extra\FirewallInstallHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\extra\FirewallInstallHelper.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\extra\iniFile.cpp"
 				>
 			</File>
@@ -620,7 +612,55 @@
 			>
 		</File>
 		<File
+			RelativePath=".\src\plugins\disk\DiskTimeMuninNodePlugin.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\disk\DiskTimeMuninNodePlugin.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\network\IfMuninNodePlugin.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\network\IfMuninNodePlugin.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\interrupts\InterruptsMuninNodePlugin.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\interrupts\InterruptsMuninNodePlugin.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\disk\IoBytesMuninNodePlugin.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\disk\IoBytesMuninNodePlugin.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\disk\IoOperationMuninNodePlugin.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\disk\IoOperationMuninNodePlugin.h"
+			>
+		</File>
+		<File
 			RelativePath=".\munin-node.rc"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\network\PingMuninNodePlugin.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\network\PingMuninNodePlugin.h"
 			>
 		</File>
 		<File
@@ -670,6 +710,22 @@
 		</File>
 		<File
 			RelativePath=".\src\stdafx.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\swap\SwapMuninNodePlugin.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\swap\SwapMuninNodePlugin.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\uptime\UptimeMuninNodePlugin.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\plugins\uptime\UptimeMuninNodePlugin.h"
 			>
 		</File>
 	</Files>

@@ -12,6 +12,7 @@ public:
   virtual ~MBMMuninNodePlugin();
 
   virtual const char *GetName() { return m_Name; };
+  virtual bool AutoConf() { return IsLoaded(); };
   virtual int GetConfig(char *buffer, int len);
   virtual int GetValues(char *buffer, int len);
   virtual bool IsLoaded();

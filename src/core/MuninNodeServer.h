@@ -12,4 +12,6 @@ public:
 private:
   MuninPluginManager m_PluginManager;
   JCSocket m_ServerSocket;
+
+  int AccessAllowed(const char *ip);
 };

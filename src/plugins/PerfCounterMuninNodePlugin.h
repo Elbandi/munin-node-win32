@@ -8,6 +8,7 @@ public:
   PerfCounterMuninNodePlugin(const std::string &sectionName);
   virtual ~PerfCounterMuninNodePlugin();
 
+  virtual bool AutoConf() { return TRUE; };
   virtual int GetConfig(char *buffer, int len);
   virtual int GetValues(char *buffer, int len);
   virtual bool IsLoaded() { return m_Loaded; };

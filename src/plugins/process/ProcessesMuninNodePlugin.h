@@ -8,6 +8,7 @@ public:
   virtual ~ProcessesMuninNodePlugin();
 
   virtual const char *GetName() { return "processes"; };
+  virtual bool AutoConf() { return TRUE; };
   virtual int GetConfig(char *buffer, int len);
   virtual int GetValues(char *buffer, int len);
   virtual bool IsLoaded() { return true; };

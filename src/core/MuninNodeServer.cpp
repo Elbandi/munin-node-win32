@@ -28,6 +28,22 @@ void MuninNodeServer::Stop()
   m_ServerSocket.Close();
 }
 
+int MuninNodeServer::AccessAllowed(const char *ip)
+{
+  long keyID = g_Config.FindKey("AccessList");
+  if ( keyID != g_Config.noID) {
+    int allowipCount = g_Config.NumValues(keyID);
+    for (int i = 0; i < allowipCount; i++) {
+      std::string aip = g_Config.GetValue(keyID, i, "");
+      if (!strcmp(ip, aip.c_str())) {
+        return 1;
+      }
+    }
+    return allowipCount == 0;
+  }
+  return 1;
+}
+
 void *MuninNodeServer::Entry()
 {	
 	int portNumber = g_Config.GetValueI("MuninNode", "PortNumber", 4949);
@@ -60,18 +76,15 @@ void *MuninNodeServer::Entry()
     // Wait for new client connection
     JCSocket *client = new JCSocket();
     if (m_ServerSocket.Accept(client)) {
-      // TODO: Add ip address matching, http://stackoverflow.com/questions/594112/matching-an-ip-to-a-cidr-mask-in-php5
-      const char *ipAddress = inet_ntoa(client->m_Address.sin_addr);
-	  if (masterAddress == "*" || ipAddress == masterAddress) {
-		  if(logConnections){
-			_Module.LogEvent("Connection from %s", ipAddress);
-		  }
-		  // Start child thread to process client socket
-		  MuninNodeClient *clientThread = new MuninNodeClient(client, this, &m_PluginManager);
-		  clientThread->Run();
-	  } else {
-		  _Module.LogError("Rejecting connection from %s", ipAddress);
-	  }
+      if (!AccessAllowed(inet_ntoa(client->m_Address.sin_addr))) {
+        _Module.LogEvent("Access denied from %s", inet_ntoa(client->m_Address.sin_addr));
+        delete client;
+        continue;
+      }
+      _Module.LogEvent("Connection from %s", inet_ntoa(client->m_Address.sin_addr));
+      // Start child thread to process client socket
+      MuninNodeClient *clientThread = new MuninNodeClient(client, this, &m_PluginManager);
+      clientThread->Run();
     } else {
       delete client;
       break;

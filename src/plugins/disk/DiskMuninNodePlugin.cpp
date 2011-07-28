@@ -22,6 +22,7 @@
 DiskMuninNodePlugin::DiskMuninNodePlugin() 
 {
   int i;
+  enabled = FALSE;
   for (i = 0; i < 32; i++) {
     drives[i][0] = NULL;
   }
@@ -31,11 +32,12 @@ DiskMuninNodePlugin::DiskMuninNodePlugin()
     drives[i][1] = ':';
     drives[i][2] = NULL;//'\\';
     drives[i][3] = NULL;
-    if (GetDriveTypeA(drives[i]) != DRIVE_FIXED) {
+    if (GetDriveType(drives[i]) != DRIVE_FIXED) {
       // Remove it
       drives[i][0] = NULL;
     } else {
       i++;
+	  enabled = TRUE;
     }
   }
 }
@@ -82,7 +84,7 @@ int DiskMuninNodePlugin::GetValues(char *buffer, int len)
   int ret;
 
   while (drives[index][0] != NULL) {
-    ret = GetDiskFreeSpaceExA(drives[index], NULL, &uliTotal, &uliFree);
+    ret = GetDiskFreeSpaceEx(drives[index], NULL, &uliTotal, &uliFree);
     ret = _snprintf(buffer, len, "_dev_%i_.value %i\n", index, 100-(int)(100.0f / uliTotal.QuadPart * uliFree.QuadPart));
     len -= ret;
     buffer += ret;

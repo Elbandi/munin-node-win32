@@ -11,8 +11,9 @@ public:
   virtual bool IsLoaded() = 0;
   /// This method should also always be thread-safe
   virtual const char *GetName() = 0;
+  virtual bool AutoConf() = 0;
   virtual int GetConfig(char *buffer, int len) = 0;
-  virtual int GetValues(char *buffer, int len) = 0;  
+  virtual int GetValues(char *buffer, int len) = 0;
   virtual bool IsThreadSafe();
 };
 
@@ -37,6 +38,7 @@ public:
   virtual const char *GetName();
   virtual int GetConfig(char *buffer, int len);
   virtual int GetValues(char *buffer, int len);
+  virtual bool AutoConf();
   virtual bool IsLoaded();
   virtual bool IsThreadSafe();
 private:

@@ -21,7 +21,9 @@
 
 HDMuninNodePlugin::HDMuninNodePlugin() 
 {
-  
+  JCAutoLockCritSec lock(&g_SmartReaderCritSec);
+  g_SmartReader.UpdateSMART();
+  enabled = g_SmartReader.m_ucDrivesWithInfo > 0;
 }
 
 HDMuninNodePlugin::~HDMuninNodePlugin() 

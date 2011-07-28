@@ -26,11 +26,19 @@
 #include "../plugins/network/NetworkMuninNodePlugin.h"
 #include "../plugins/process/ProcessesMuninNodePlugin.h"
 #include "../plugins/mbm/MBMMuninNodePlugin.h"
+#include "../plugins/uptime/UptimeMuninNodePlugin.h"
 #include "../plugins/disk/HDMuninNodePlugin.h"
 #include "../plugins/disk/SMARTMuninNodePlugin.h"
+#include "../plugins/disk/DiskTimeMuninNodePlugin.h"
 #include "../plugins/speedfan/SpeedFanNodePlugin.h"
 #include "../plugins/PerfCounterMuninNodePlugin.h"
 #include "../plugins/external/ExternalMuninNodePlugin.h"
+#include "../plugins/network/IfMuninNodePlugin.h"
+#include "../plugins/network/PingMuninNodePlugin.h"
+#include "../plugins/swap/SwapMuninNodePlugin.h"
+#include "../plugins/interrupts/InterruptsMuninNodePlugin.h"
+#include "../plugins/disk/IoBytesMuninNodePlugin.h"
+#include "../plugins/disk/IoOperationMuninNodePlugin.h"
 
 #ifdef _DEBUG
 class MuninPluginManagerTestThread : public JCThread {
@@ -54,12 +62,43 @@ MuninPluginManager::MuninPluginManager()
 {
   if (g_Config.GetValueB("Plugins", "Disk", true))
     AddPlugin(new DiskMuninNodePlugin());
+  if (g_Config.GetValueB("Plugins", "DiskTime", true))
+	AddPlugin(new DiskTimeMuninNodePlugin());
   if (g_Config.GetValueB("Plugins", "Memory", true))
     AddPlugin(new MemoryMuninNodePlugin());
  if (g_Config.GetValueB("Plugins", "Processes", true))
     AddPlugin(new ProcessesMuninNodePlugin());
   if (g_Config.GetValueB("Plugins", "Network", true))
     AddPlugin(new NetworkMuninNodePlugin());
+  if (g_Config.GetValueB("Plugins", "If", true))
+    AddPlugin(new IfMuninNodePlugin());
+  if (g_Config.GetValueB("Plugins", "Interrupts", true))
+    AddPlugin(new InterruptsMuninNodePlugin());
+  if (g_Config.GetValueB("Plugins", "IoBytes", true))
+    AddPlugin(new IoBytesMuninNodePlugin());
+  if (g_Config.GetValueB("Plugins", "IoOperation", true))
+    AddPlugin(new IoOperationMuninNodePlugin());
+  if (g_Config.GetValueB("Plugins", "Ping", true))
+  {
+    int pingCount = g_Config.NumValues("PingPlugin");
+    for (int i = 0; i < pingCount; i++) {
+      std::string valueName = g_Config.GetValueName("PingPlugin", i); 
+      std::string hostname = g_Config.GetValue("PingPlugin", valueName);
+      PingMuninNodePlugin *plugin = new PingMuninNodePlugin(hostname);
+      if (plugin->IsLoaded()) {
+        AddPlugin(plugin);
+      } else {
+        _Module.LogEvent("Failed to load Ping plugin: %s", hostname.c_str());
+        delete plugin;
+      }
+    }
+  }
+  if (g_Config.GetValueB("Plugins", "Processes", true))
+    AddPlugin(new ProcessesMuninNodePlugin());
+  if (g_Config.GetValueB("Plugins", "Swap", true))
+    AddPlugin(new SwapMuninNodePlugin());
+  if (g_Config.GetValueB("Plugins", "Uptime", true))
+    AddPlugin(new UptimeMuninNodePlugin());
   
   if (g_Config.GetValueB("Plugins", "MbmTemp", true))
     AddPlugin(new MBMMuninNodePlugin(mbm::stTemperature));
@@ -134,6 +173,11 @@ MuninPluginManager::~MuninPluginManager()
 void MuninPluginManager::AddPlugin(MuninNodePlugin *plugin)
 {
   _Module.LogEvent("Loaded plugin [%s - %s]", typeid(*plugin).name(), plugin->GetName());
+  if (!plugin->AutoConf())
+  {
+	  delete plugin;
+	  return;
+  }
   if (!plugin->IsThreadSafe())
     plugin = new MuninNodePluginLockWrapper(plugin);
   m_Plugins.push_back(plugin);

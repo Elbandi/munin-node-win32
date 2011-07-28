@@ -52,6 +52,11 @@ int MuninNodePluginLockWrapper::GetValues(char *buffer, int len)
   return m_Plugin->GetValues(buffer, len); 
 }
 
+bool MuninNodePluginLockWrapper::AutoConf() 
+{
+  return m_Plugin->AutoConf(); 
+}
+
 bool MuninNodePluginLockWrapper::IsLoaded() 
 {
   return m_Plugin->IsLoaded(); 

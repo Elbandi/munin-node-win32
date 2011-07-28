@@ -1,13 +1,12 @@
 #pragma once
 #include "../../core/MuninNodePlugin.h"
 
-class MemoryMuninNodePlugin : public MuninNodePlugin
-{
+class IoBytesMuninNodePlugin : public MuninNodePlugin {
 public:
-  MemoryMuninNodePlugin();
-  virtual ~MemoryMuninNodePlugin();
+  IoBytesMuninNodePlugin();
+  ~IoBytesMuninNodePlugin();
 
-  virtual const char *GetName() { return "memory"; }; 
+  virtual const char *GetName() { return "iobytes"; };
   virtual bool AutoConf() { return TRUE; };
   virtual int GetConfig(char *buffer, int len);
   virtual int GetValues(char *buffer, int len);
