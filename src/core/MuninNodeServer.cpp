@@ -30,10 +30,10 @@ void MuninNodeServer::Stop()
 
 int MuninNodeServer::AccessAllowed(const char *ip)
 {
-  long keyID = g_Config.FindKey("AccessList");
+  size_t keyID = g_Config.FindKey("AccessList");
   if ( keyID != g_Config.noID) {
-    int allowipCount = g_Config.NumValues(keyID);
-    for (int i = 0; i < allowipCount; i++) {
+    size_t allowipCount = g_Config.NumValues(keyID);
+    for (size_t i = 0; i < allowipCount; i++) {
       std::string aip = g_Config.GetValue(keyID, i, "");
       if (!strcmp(ip, aip.c_str())) {
         return 1;

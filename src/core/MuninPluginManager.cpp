@@ -80,8 +80,8 @@ MuninPluginManager::MuninPluginManager()
     AddPlugin(new IoOperationMuninNodePlugin());
   if (g_Config.GetValueB("Plugins", "Ping", true))
   {
-    int pingCount = g_Config.NumValues("PingPlugin");
-    for (int i = 0; i < pingCount; i++) {
+    size_t pingCount = g_Config.NumValues("PingPlugin");
+    for (size_t i = 0; i < pingCount; i++) {
       std::string valueName = g_Config.GetValueName("PingPlugin", i); 
       std::string hostname = g_Config.GetValue("PingPlugin", valueName);
       PingMuninNodePlugin *plugin = new PingMuninNodePlugin(hostname);
@@ -122,8 +122,8 @@ MuninPluginManager::MuninPluginManager()
   
   if (g_Config.GetValueB("Plugins", "External", true)) {
     int externalTimeout = g_Config.GetValueI("Plugins", "ExternalTimeout", 0);
-    int externalCount = g_Config.NumValues("ExternalPlugin");
-    for (int i = 0; i < externalCount; i++) {
+    size_t externalCount = g_Config.NumValues("ExternalPlugin");
+    for (size_t i = 0; i < externalCount; i++) {
       std::string valueName = g_Config.GetValueName("ExternalPlugin", i); 
       std::string filename = g_Config.GetValue("ExternalPlugin", valueName);
       ExternalMuninNodePlugin *plugin = new ExternalMuninNodePlugin(filename, externalTimeout);

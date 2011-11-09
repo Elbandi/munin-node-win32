@@ -45,7 +45,7 @@ DWORDLONG GetTickCount_64(void)
 	}
 
 	QueryPerformanceCounter(&li);
-	return li.QuadPart * tickFactor;
+	return (DWORDLONG)(li.QuadPart * tickFactor);
 }
 
 UptimeMuninNodePlugin::UptimeMuninNodePlugin()

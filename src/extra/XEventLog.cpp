@@ -316,7 +316,7 @@ BOOL CXEventLog::RegisterSource(LPCTSTR lpszApp,
 		TRACE(_T("szPathName=<%s>\n"), szPathName);
 
 		::RegSetValueEx(hKey,  _T("EventMessageFile"), 0, REG_SZ,
-			(const BYTE *) szPathName, (_tcslen(szPathName) + 1)*sizeof(TCHAR));
+			(const BYTE *) szPathName, ((DWORD)_tcslen(szPathName) + 1)*sizeof(TCHAR));
 
 		// === write TypesSupported key ===
 
