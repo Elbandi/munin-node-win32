@@ -29,7 +29,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="&quot;$(VCInstallDir)bin\link.exe&quot; /LIB /DEF:ntdll.def /MACHINE:X86 /OUT:$(OutDir)/ntdll.lib"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -66,7 +66,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(OutDir)/ntdll.lib"
+				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(ProjectDir)/ntdll_win32.lib"
 				OutputFile="$(OutDir)/munin-node.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
@@ -110,7 +110,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="&quot;$(VCInstallDir)bin\link.exe&quot; /LIB /DEF:ntdll.def /MACHINE:X64/OUT:$(OutDir)/ntdll.lib"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -148,7 +148,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(OutDir)/ntdll.lib"
+				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(ProjectDir)/ntdll_X64.lib"
 				OutputFile="$(OutDir)/munin-node.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
@@ -193,7 +193,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="&quot;$(VCInstallDir)bin\link.exe&quot; /LIB /DEF:ntdll.def /MACHINE:X86 /OUT:$(OutDir)/ntdll.lib"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -233,7 +233,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(OutDir)/ntdll.lib"
+				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(ProjectDir)/ntdll_win32.lib"
 				OutputFile="$(OutDir)/munin-node.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""
@@ -279,7 +279,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="&quot;$(VCInstallDir)bin\link.exe&quot; /LIB /DEF:ntdll.def /MACHINE:X64 /OUT:$(OutDir)/ntdll.lib"
+				CommandLine=""
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -320,7 +320,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(OutDir)/ntdll.lib"
+				AdditionalDependencies="ws2_32.lib Iphlpapi.lib Pdh.lib msi.lib Psapi.lib $(ProjectDir)/ntdll_X64.lib"
 				OutputFile="$(OutDir)/munin-node.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories=""

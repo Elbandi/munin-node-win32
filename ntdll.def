@@ -1,3 +1,0 @@
-LIBRARY ntdll.dll
-EXPORTS
-NtQuerySystemInformation@16=NtQuerySystemInformation
