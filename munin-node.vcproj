@@ -394,11 +394,35 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\plugins\disk\DiskTimeMuninNodePlugin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\disk\DiskTimeMuninNodePlugin.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\plugins\disk\HDMuninNodePlugin.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\src\plugins\disk\HDMuninNodePlugin.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\disk\IoBytesMuninNodePlugin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\disk\IoBytesMuninNodePlugin.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\disk\IoOperationMuninNodePlugin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\disk\IoOperationMuninNodePlugin.h"
 					>
 				</File>
 				<File
@@ -474,11 +498,27 @@
 				Name="network"
 				>
 				<File
+					RelativePath=".\src\plugins\network\IfMuninNodePlugin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\network\IfMuninNodePlugin.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\plugins\network\NetworkMuninNodePlugin.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\src\plugins\network\NetworkMuninNodePlugin.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\network\PingMuninNodePlugin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\network\PingMuninNodePlugin.h"
 					>
 				</File>
 			</Filter>
@@ -499,6 +539,42 @@
 				</File>
 				<File
 					RelativePath=".\src\plugins\external\ExternalMuninNodePlugin.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="swap"
+				>
+				<File
+					RelativePath=".\src\plugins\swap\SwapMuninNodePlugin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\swap\SwapMuninNodePlugin.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="uptime"
+				>
+				<File
+					RelativePath=".\src\plugins\uptime\UptimeMuninNodePlugin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\uptime\UptimeMuninNodePlugin.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="interrupts"
+				>
+				<File
+					RelativePath=".\src\plugins\interrupts\InterruptsMuninNodePlugin.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\plugins\interrupts\InterruptsMuninNodePlugin.h"
 					>
 				</File>
 			</Filter>
@@ -612,55 +688,7 @@
 			>
 		</File>
 		<File
-			RelativePath=".\src\plugins\disk\DiskTimeMuninNodePlugin.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\disk\DiskTimeMuninNodePlugin.h"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\network\IfMuninNodePlugin.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\network\IfMuninNodePlugin.h"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\interrupts\InterruptsMuninNodePlugin.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\interrupts\InterruptsMuninNodePlugin.h"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\disk\IoBytesMuninNodePlugin.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\disk\IoBytesMuninNodePlugin.h"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\disk\IoOperationMuninNodePlugin.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\disk\IoOperationMuninNodePlugin.h"
-			>
-		</File>
-		<File
 			RelativePath=".\munin-node.rc"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\network\PingMuninNodePlugin.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\network\PingMuninNodePlugin.h"
 			>
 		</File>
 		<File
@@ -710,22 +738,6 @@
 		</File>
 		<File
 			RelativePath=".\src\stdafx.h"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\swap\SwapMuninNodePlugin.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\swap\SwapMuninNodePlugin.h"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\uptime\UptimeMuninNodePlugin.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\src\plugins\uptime\UptimeMuninNodePlugin.h"
 			>
 		</File>
 	</Files>
